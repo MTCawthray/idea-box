@@ -2,22 +2,34 @@
 <html lang="en">
 <head>
   <title>Idea Box</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main>
     <section class="side-bar">
+      <h1>Idea Box</h1>
+      <div class="function-buttons">
+        <button id="filter-ideas-button">Filter Starred Ideas></button>
+        <button id="show-starred-ideas">Show Starred Ideas></button>
+      </div>
     </section>
     <section class="content">
       <form class="idea-input">
-        <input type="text" class="input-box" id="title-input">
-        <input type="text" class="input-box" id="body-input">
-        <button class="save-input"></button>
-
+        <input type="text" class="input-box" id="title-input"/>
+        <input type="text" class="input-box" id="body-input"/>
+        <button class="save-input">Save</button>
+        <input type="text" class="input-box" id="search-ideas-box"/>
       </form>
+      <div class="idea-display-section">
+        <article class="idea-card"></>
+        <article class="idea-card"></>
+        <article class="idea-card"></>
+        <article class="idea-card"></>
+        <article class="idea-card"></>
+      </div>
     </section>
   </main>
   <script type="text/javascript" src="main.js"></script>
