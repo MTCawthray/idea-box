@@ -49,7 +49,47 @@ aside {
   margin-bottom: 30px;
   padding: 10px;
   font-weight: bold;
+  border: 2px solid #353567;
+  border-radius: 2px;
 }
+
+#title-input {
+  margin: 1em 15em;
+  height: 4em;
+  border: 2px solid #353567;
+  border-radius: 2px;
+}
+
+#body-input {
+  margin: 1em 15em;
+  height: 8em;
+  border: 2px solid #353567;
+  border-radius: 2px;
+}
+
+#search-ideas-box {
+  margin: 1em 15em;
+  height: 4em;
+  border: 2px solid #353567;
+  border-radius: 2px;
+}
+
+.save-input {
+    margin: 1em 11em;
+    height: 4em;
+    background-color: #353567;
+    color: #E9E9F3;
+    font-weight: bold;
+    font-size: large;
+    border: 2px solid #353567;
+    border-radius: 2px;
+
+}
+
+.input-label {
+  margin: 1em 10em -0.5em 12.5em;
+}
+
 
 .function-buttons {
   /* padding-right: 15px; */
@@ -60,6 +100,33 @@ aside {
   border-top: 2px solid #353567;
   border-bottom: 2px solid #353567;
   width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.idea-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 35%;
+  background-color: #a9aad2;
+}
+
+.idea-display-section {
+  background-color: #eaeaf4;
+  width: 100%;
+  height: 65%;
+}
+
+label {
+  font-family: 'Open Sans', sans-serif;
+  color: #201E3E;
+  font-weight: bold;
 }
 
 button {
