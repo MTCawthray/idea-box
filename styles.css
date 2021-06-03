@@ -74,6 +74,13 @@ aside {
   border-radius: 2px;
 }
 
+.search-img {
+  height: 1em;
+  width: 1em;
+  display: inline-block;
+
+}
+
 .save-input {
     margin: 1em 11em;
     height: 4em;
