@@ -15,6 +15,11 @@ h1 {
   padding-left: 15px;
 }
 
+h3 {
+  font-weight: bold;
+  margin-top: 0px;
+}
+
 aside {
   /* padding-left: 15px; */
   height: 60em;
@@ -123,18 +128,34 @@ aside {
   height: 65%;
 }
 
+.card-header {
+  height: 1.5em;
+  background-color: #1F1F3D;
+}
+
 .idea-card {
-    margin: 15px;
-    padding: 10px;
-    width: 12em;
-    height: 10em;
-    border: 2px solid #1F1F3D;
-    border-radius: 2px;
-    border-top: 1.5em solid #1F1F3D;
-    border-bottom: 1.5em solid #5356A4;
-    background-color: #ffffff;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 12em;
+  height: 12em;
+  margin: 10px;
+  padding-bottom: 0px;
+  border: 2px solid #1F1F3D;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+
+.card-content {
+  margin: 10px;
+}
+
+.card-footer {
+  font-weight: bold;
+  height: 1.5em;
+  padding: 6px;
+  background-color: #5356A4;
+  color: #ffffff;
 }
 
 label {
