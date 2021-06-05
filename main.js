@@ -8,7 +8,8 @@ var bodyInput = document.querySelector('.body-input');
 var searchIdeasInput = document.querySelector('.search-ideas-box');
 var titleInput = document.querySelector('.title-input');
 var displaySection = document.querySelector('.idea-display-section');
-var ideas = [];
+var ideasList = [];
+var newIdea;
 
 //-----------Event Listeners----------//
 
@@ -20,6 +21,9 @@ createIdea(event);
 // bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 // titleInput.addEventListener('', );
+window.addEventListener('load', function() {
+  renderIdea(event);
+});
 
 //-------------functions----------------//
 
@@ -31,15 +35,21 @@ createIdea(event);
 // }
 function createIdea(event) {
   event.preventDefault();
-  var newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+  debugger
+  newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
   console.log(newIdea);
-  ideas.push(newIdea);
+  ideasList.push(newIdea);
+  newIdea.saveToStorage(newIdea);
   renderIdea();
-  // newIdea.saveToStorage(ideas);
+  // ideasList = getIdeasFromLocalStorage()
 }
-function renderIdea() {
+
+function renderIdea(event) {
+  event.preventDefault();
+  newIdea.getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
-  for (var i = 0; i < ideas.length; i++) {
+  // var ideas = newIdea.getIdeasFromLocalStorage();
+  for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
     <article class="idea-card">
     <div class="card-header">
@@ -47,8 +57,8 @@ function renderIdea() {
     <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
     </div>
     <div class="card-content">
-    <h3>${ideas[i].title}</h3>
-    <p>${ideas[i].body}</p>
+    <h3>${ideasList[i].title}</h3>
+    <p>${ideasList[i].body}</p>
     </div>
     <div class="card-footer">
     <img src="./assets/comment.svg" alt="Add comment to card">
