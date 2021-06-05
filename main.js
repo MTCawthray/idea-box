@@ -21,34 +21,22 @@ createIdea(event);
 // bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 // titleInput.addEventListener('', );
-window.addEventListener('load', function() {
-  renderIdea(event);
-});
+window.addEventListener('load', renderIdea);
 
 //-------------functions----------------//
 
-// function createIdea() {
-//   var idea = new Idea(titleInput.value, bodyInput.value);
-//   // saveToStorage();
-//   console.log(idea, ideas);
-//   ideas.push(idea);
-// }
+
 function createIdea(event) {
   event.preventDefault();
-  debugger
-  newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-  console.log(newIdea);
-  ideasList.push(newIdea);
-  newIdea.saveToStorage(newIdea);
+  var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+  newestIdea.saveToStorage();
+  ideasList = [];
   renderIdea();
-  // ideasList = getIdeasFromLocalStorage()
 }
 
-function renderIdea(event) {
-  event.preventDefault();
-  newIdea.getIdeasFromLocalStorage();
+function renderIdea() {
+  getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
-  // var ideas = newIdea.getIdeasFromLocalStorage();
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
     <article class="idea-card">
@@ -67,4 +55,19 @@ function renderIdea(event) {
     </article>
     `
   }
+}
+
+function getIdeasFromLocalStorage() {
+  if (localStorage) {
+    for(var i =0; i < localStorage.length; i++){
+      var retrieveIdea = localStorage.getItem(localStorage.key(i));
+      var parsedIdea = JSON.parse(retrieveIdea);
+      var idea = makeIdea(parsedIdea);
+    }
+}
+}
+
+function makeIdea(parsedIdea) {
+  newIdea = new Idea(parsedIdea);
+  ideasList.push(newIdea);
 }
