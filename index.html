@@ -12,20 +12,20 @@
     <aside>
       <h1><p>IdeaBox</p></h1>
       <div class="function-buttons">
-        <button id="filter-ideas-button">Filter Starred Ideas</button>
-        <button id="show-starred-ideas-button">Show Starred Ideas</button>
+        <button class="filter-ideas-button">Filter Starred Ideas</button>
+        <button class="show-starred-ideas-button">Show Starred Ideas</button>
       </div>
     </aside>
     <section class="content">
       <form class="idea-input">
         <label for="title-input" class="input-label">Title</label>
-        <input type="text" class="input-box" id="title-input"/>
+        <input type="text" class="input-box title-input"/>
         <label for="body-input" class="input-label">Body</label>
-        <input type="text" class="input-box" id="body-input"/>
+        <input type="text" class="input-box body-input"/>
         <button class="save-input">Save</button>
         <div class="search-bar">
           <img src="./assets/search.svg" alt="search icon" class="search-icon"/>
-          <input type="text" class="input-box" id="search-ideas-box" placeholder="Search ideas"/>
+          <input type="text" class="input-box search-ideas-box" placeholder="Search ideas"/>
         </div>
       </form>
       <div class="idea-display-section">
@@ -49,8 +49,8 @@
         <article class="idea-card"></article>
       </div>
     </section>
+    <script type="text/javascript" src="Idea.js"></script>
+    <script type="text/javascript" src="main.js"></script>
   </main>
-  <script type="text/javascript" src="main.js"></script>
-  <script type="text/javascript" src="idea.js"></script>
 </body>
 </html>

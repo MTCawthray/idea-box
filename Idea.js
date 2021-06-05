@@ -1,15 +1,17 @@
 class Idea {
-  constructor(title, body, star, id) {
+  constructor(title, body) {
     this.title = title;
     this.body = body;
-    this.star = star;
-    this.id = id;
+    this.star = false;
+    this.id = new Date().valueOf();
   }
 
   saveToStorage() {
-//create a variable that stores our object instance
-//create a variable that stores the var above converted to JSON string
-//set
+    var newIdea = new Idea(titleInput.value, bodyInput.value);
+    var stringifiedNewIdea = JSON.stringify(newIdea);
+    localStorage.setItem('idea', stringifiedNewIdea);
+    console.log(localStorage)
+//push saved instance to ideas array
   }
 
   deleteFromStorage() {
@@ -19,7 +21,7 @@ class Idea {
   updateIdea() {
 
   }
-
 }
 
-module.exports = Idea;
+
+// module.exports = Idea;
