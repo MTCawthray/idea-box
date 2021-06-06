@@ -7,21 +7,28 @@ var bodyInput = document.querySelector('.body-input');
 var searchIdeasInput = document.querySelector('.search-ideas-box');
 var titleInput = document.querySelector('.title-input');
 var displaySection = document.querySelector('.idea-display-section');
+var closeCardBtn = document.querySelector('.close-card');
 var ideasList = [];
 var newIdea;
+
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
 });
 // showStarIdeaBtn.addEventListener('', );
-// bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
-// titleInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
+displaySection.addEventListener('click', function(event) {
+  if (event.target.className === 'close-card') {
+    event.target.closest('article').remove();
+  }
+});
+
 //-------------functions----------------//
+
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
     saveIdeaBtn.disabled = true;
@@ -72,7 +79,7 @@ function getIdeasFromLocalStorage() {
       var parsedIdea = JSON.parse(retrieveIdea);
       var idea = makeIdea(parsedIdea);
     }
-}
+  }
 };
 
 function makeIdea(parsedIdea) {
