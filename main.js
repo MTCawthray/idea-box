@@ -21,19 +21,40 @@ createIdea(event);
 // bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 // titleInput.addEventListener('', );
+bodyInput.addEventListener('keyup', disableSaveButton);
+titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
 
 //-------------functions----------------//
 
+//Disable save button if the tite or body or both are empty &
+//Button will become a lighter shade of purple
+//When mouse hovers it is no longer a pointer
+//Will need logic:
+//if !title.value || or !body.value then the new hover state and lighter
+//color will be triggered (Disabled class in HTML that will be removed
+//When save button is diabled)
+
+function disableSaveButton() {
+  if (titleInput.value === "" || bodyInput.value === "") {
+    saveIdeaBtn.disabled = true;
+    saveIdeaBtn.classList.add('save-input:disabled')
+  } else {
+    saveIdeaBtn.disabled = false;
+  }
+}
 
 function createIdea(event) {
   event.preventDefault();
-  var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-  newestIdea.saveToStorage();
-  ideasList = [];
-  renderIdea();
-  clearIdeaInput();
-}
+// if (titleInput.value && bodyInput.value) {
+    saveIdeaBtn.disabled = false
+    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+    newestIdea.saveToStorage();
+    ideasList = [];
+    renderIdea();
+    clearIdeaInput();
+  // } else {saveIdeaBtn.classList.add("dont-click")};
+};
 
 function renderIdea() {
   getIdeasFromLocalStorage();
