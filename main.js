@@ -32,6 +32,7 @@ function createIdea(event) {
   newestIdea.saveToStorage();
   ideasList = [];
   renderIdea();
+  clearIdeaInput();
 }
 
 function renderIdea() {
@@ -71,3 +72,8 @@ function makeIdea(parsedIdea) {
   newIdea = new Idea(parsedIdea);
   ideasList.push(newIdea);
 }
+
+function clearIdeaInput() {
+  titleInput.value = "";
+  bodyInput.value = "";
+};
