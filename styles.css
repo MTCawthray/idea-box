@@ -141,6 +141,7 @@ input {
 
 .save-input:disabled,
 .save-input[disabled]{
+  cursor: not-allowed;
   border: 2px solid #5356a4;
   background-color: #EAEAF4;
   color: #1F1F3D;
