@@ -21,43 +21,23 @@ createIdea(event);
 // bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 // titleInput.addEventListener('', );
-bodyInput.addEventListener('keyup', disableSaveButton);
-titleInput.addEventListener('keyup', disableSaveButton);
-window.addEventListener('load', renderIdea);
+window.addEventListener('load', function() {
+  renderIdea(event);
+});
 
 //-------------functions----------------//
 
-//Disable save button if the tite or body or both are empty &
-//Button will become a lighter shade of purple
-//When mouse hovers it is no longer a pointer
-//Will need logic:
-//if !title.value || or !body.value then the new hover state and lighter
-//color will be triggered (Disabled class in HTML that will be removed
-//When save button is diabled)
-
-function disableSaveButton() {
-  if (titleInput.value === "" || bodyInput.value === "") {
-    saveIdeaBtn.disabled = true;
-    saveIdeaBtn.classList.add('save-input:disabled')
-  } else {
-    saveIdeaBtn.disabled = false;
-  }
-}
-
 function createIdea(event) {
   event.preventDefault();
-// if (titleInput.value && bodyInput.value) {
-    saveIdeaBtn.disabled = false
-    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-    newestIdea.saveToStorage();
-    ideasList = [];
-    renderIdea();
-    clearIdeaInput();
-  // } else {saveIdeaBtn.classList.add("dont-click")};
-};
+  newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+  console.log(newIdea);
+  ideasList.push(newIdea);
+  newIdea.saveToStorage(newIdea);
+  renderIdea();
+}
 
-function renderIdea() {
-  getIdeasFromLocalStorage();
+function renderIdea(event) {
+  newIdea.getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
@@ -78,23 +58,3 @@ function renderIdea() {
     `
   }
 }
-
-function getIdeasFromLocalStorage() {
-  if (localStorage) {
-    for(var i =0; i < localStorage.length; i++){
-      var retrieveIdea = localStorage.getItem(localStorage.key(i));
-      var parsedIdea = JSON.parse(retrieveIdea);
-      var idea = makeIdea(parsedIdea);
-    }
-}
-}
-
-function makeIdea(parsedIdea) {
-  newIdea = new Idea(parsedIdea);
-  ideasList.push(newIdea);
-}
-
-function clearIdeaInput() {
-  titleInput.value = "";
-  bodyInput.value = "";
-};
