@@ -1,5 +1,4 @@
 //---------Variables-------------//
-
 var filterStarIdeaBtn = document.querySelector('.filter-ideas-button');
 var searchIconBtn = document.querySelector('.search-icon');
 var saveIdeaBtn = document.querySelector('.save-input');
@@ -10,9 +9,7 @@ var titleInput = document.querySelector('.title-input');
 var displaySection = document.querySelector('.idea-display-section');
 var ideasList = [];
 var newIdea;
-
 //-----------Event Listeners----------//
-
 // filterStarIdeaBtn.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
@@ -21,23 +18,32 @@ createIdea(event);
 // bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 // titleInput.addEventListener('', );
-window.addEventListener('load', function() {
-  renderIdea(event);
-});
-
+bodyInput.addEventListener('keyup', disableSaveButton);
+titleInput.addEventListener('keyup', disableSaveButton);
+window.addEventListener('load', renderIdea);
 //-------------functions----------------//
+function disableSaveButton() {
+  if (titleInput.value === "" || bodyInput.value === "") {
+    saveIdeaBtn.disabled = true;
+    saveIdeaBtn.classList.add('save-input:disabled')
+  } else {
+    saveIdeaBtn.disabled = false;
+  }
+};
 
 function createIdea(event) {
   event.preventDefault();
-  newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-  console.log(newIdea);
-  ideasList.push(newIdea);
-  newIdea.saveToStorage(newIdea);
-  renderIdea();
-}
+    saveIdeaBtn.disabled = false
+    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+    newestIdea.saveToStorage();
+    ideasList = [];
+    renderIdea();
+    clearIdeaInput();
+    saveIdeaBtn.disabled = true;
+};
 
-function renderIdea(event) {
-  newIdea.getIdeasFromLocalStorage();
+function renderIdea() {
+  getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
@@ -57,4 +63,24 @@ function renderIdea(event) {
     </article>
     `
   }
+};
+
+function getIdeasFromLocalStorage() {
+  if (localStorage) {
+    for(var i =0; i < localStorage.length; i++){
+      var retrieveIdea = localStorage.getItem(localStorage.key(i));
+      var parsedIdea = JSON.parse(retrieveIdea);
+      var idea = makeIdea(parsedIdea);
+    }
 }
+};
+
+function makeIdea(parsedIdea) {
+  newIdea = new Idea(parsedIdea);
+  ideasList.push(newIdea);
+};
+
+function clearIdeaInput() {
+  titleInput.value = "";
+  bodyInput.value = "";
+};
