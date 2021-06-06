@@ -13,15 +13,10 @@ class Idea {
   }
 
   deleteFromStorage() {
-    
+    localStorage.removeItem(this.id);
   }
 
   updateIdea() {
-
+    
   }
-
-}
-
-
-
-// module.exports = Idea;
+};
