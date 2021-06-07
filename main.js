@@ -8,6 +8,7 @@ var searchIdeasInput = document.querySelector('.search-ideas-box');
 var titleInput = document.querySelector('.title-input');
 var displaySection = document.querySelector('.idea-display-section');
 var closeCardBtn = document.querySelector('.close-card');
+var star = document.querySelector('.star');
 var ideasList = [];
 var newIdea;
 
@@ -27,6 +28,16 @@ displaySection.addEventListener('click', function(event) {
   }
 });
 
+displaySection.addEventListener('click', function(event) {
+  if (event.target.className === 'star') {
+    event.target.src = './assets/star-active.svg';
+    event.target.classList.add('active');
+  } else if (event.target.className === 'star active') {
+    event.target.src = './assets/star.svg';
+    event.target.classList.remove('active');
+  }
+});
+
 //-------------functions----------------//
 
 function disableSaveButton() {
@@ -39,6 +50,7 @@ function disableSaveButton() {
 };
 
 function createIdea(event) {
+  debugger
   event.preventDefault();
     saveIdeaBtn.disabled = false
     var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
@@ -56,7 +68,7 @@ function renderIdea() {
     displaySection.innerHTML += `
     <article class="idea-card">
     <div class="card-header">
-    <img src="./assets/star-active.svg" alt="Favorite current card">
+    <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
     <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
     </div>
     <div class="card-content">
