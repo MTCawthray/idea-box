@@ -1,5 +1,4 @@
 //---------Variables-------------//
-
 var filterStarIdeaBtn = document.querySelector('.filter-ideas-button');
 var searchIconBtn = document.querySelector('.search-icon');
 var saveIdeaBtn = document.querySelector('.save-input');
@@ -8,32 +7,38 @@ var bodyInput = document.querySelector('.body-input');
 var searchIdeasInput = document.querySelector('.search-ideas-box');
 var titleInput = document.querySelector('.title-input');
 var displaySection = document.querySelector('.idea-display-section');
+var closeCardBtn = document.querySelector('.close-card');
+var star = document.querySelector('.star');
 var ideasList = [];
 var newIdea;
 
 //-----------Event Listeners----------//
-
 // filterStarIdeaBtn.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
 });
 // showStarIdeaBtn.addEventListener('', );
-// bodyInput.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
-// titleInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
+displaySection.addEventListener('click', function(event) {
+  if (event.target.className === 'close-card') {
+    event.target.closest('article').remove();
+  }
+});
+
+displaySection.addEventListener('click', function(event) {
+  if (event.target.className === 'star') {
+    event.target.src = './assets/star-active.svg';
+    event.target.classList.add('active');
+  } else if (event.target.className === 'star active') {
+    event.target.src = './assets/star.svg';
+    event.target.classList.remove('active');
+  }
+});
 
 //-------------functions----------------//
-
-//Disable save button if the tite or body or both are empty &
-//Button will become a lighter shade of purple
-//When mouse hovers it is no longer a pointer
-//Will need logic:
-//if !title.value || or !body.value then the new hover state and lighter
-//color will be triggered (Disabled class in HTML that will be removed
-//When save button is diabled)
 
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
@@ -42,18 +47,18 @@ function disableSaveButton() {
   } else {
     saveIdeaBtn.disabled = false;
   }
-}
+};
 
 function createIdea(event) {
+  debugger
   event.preventDefault();
-// if (titleInput.value && bodyInput.value) {
     saveIdeaBtn.disabled = false
     var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
     newestIdea.saveToStorage();
     ideasList = [];
     renderIdea();
     clearIdeaInput();
-  // } else {saveIdeaBtn.classList.add("dont-click")};
+    saveIdeaBtn.disabled = true;
 };
 
 function renderIdea() {
@@ -63,7 +68,7 @@ function renderIdea() {
     displaySection.innerHTML += `
     <article class="idea-card">
     <div class="card-header">
-    <img src="./assets/star-active.svg" alt="Favorite current card">
+    <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
     <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
     </div>
     <div class="card-content">
@@ -77,7 +82,7 @@ function renderIdea() {
     </article>
     `
   }
-}
+};
 
 function getIdeasFromLocalStorage() {
   if (localStorage) {
@@ -86,13 +91,13 @@ function getIdeasFromLocalStorage() {
       var parsedIdea = JSON.parse(retrieveIdea);
       var idea = makeIdea(parsedIdea);
     }
-}
-}
+  }
+};
 
 function makeIdea(parsedIdea) {
   newIdea = new Idea(parsedIdea);
   ideasList.push(newIdea);
-}
+};
 
 function clearIdeaInput() {
   titleInput.value = "";
