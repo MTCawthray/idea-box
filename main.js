@@ -22,13 +22,12 @@ createIdea(event);
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', function(event) {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-  }
-});
+displaySection.addEventListener('click', closeCard);
+displaySection.addEventListener('click', toggleStar);
 
-displaySection.addEventListener('click', function(event) {
+//-------------functions----------------//
+
+function toggleStar(event) {
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -36,9 +35,13 @@ displaySection.addEventListener('click', function(event) {
     event.target.src = './assets/star.svg';
     event.target.classList.remove('active');
   }
-});
+}
 
-//-------------functions----------------//
+function closeCard(event) {
+  if (event.target.className === 'close-card') {
+    event.target.closest('article').remove();
+  }
+}
 
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
@@ -50,7 +53,6 @@ function disableSaveButton() {
 };
 
 function createIdea(event) {
-  debugger
   event.preventDefault();
     saveIdeaBtn.disabled = false
     var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
