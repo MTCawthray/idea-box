@@ -15,14 +15,14 @@ var newIdea;
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
-  createIdea();
+  createIdea(event);
 });
 // showStarIdeaBtn.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', closeCard);
+displaySection.addEventListener('click', deleteFromArray);
 displaySection.addEventListener('click', toggleStar);
 
 //-------------functions----------------//
@@ -39,8 +39,23 @@ function toggleStar() {
 function closeCard() {
   if (event.target.className === 'close-card') {
     event.target.closest('article').remove();
+    // deleteFromArray();
+    console.log(ideasList);
   }
 };
+
+function deleteFromArray() {
+  if (event.target.className === 'close-card') {
+    event.target.closest('article').remove();
+  for (i = 0; i < ideasList.length; i++) {
+   if (Number(event.target.id) === ideasList[i].id) {
+     ideasList.splice(i, 1);
+     // deleteFromStorage();
+   }
+ }
+}
+}
+
 
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
@@ -52,7 +67,6 @@ function disableSaveButton() {
 };
 
 function createIdea(event) {
-  debugger
   event.preventDefault();
     saveIdeaBtn.disabled = false
     var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
@@ -68,10 +82,10 @@ function renderIdea() {
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
-    <article class="idea-card">
+    <article class="idea-card" id="${ideasList[i].id}">
     <div class="card-header">
     <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
-    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
+    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
     </div>
     <div class="card-content">
     <h3>${ideasList[i].title}</h3>
