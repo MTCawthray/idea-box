@@ -15,20 +15,18 @@ var newIdea;
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
-createIdea(event);
+  createIdea();
 });
 // showStarIdeaBtn.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', function(event) {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-  }
-});
+displaySection.addEventListener('click', closeCard);
+displaySection.addEventListener('click', toggleStar);
 
-displaySection.addEventListener('click', function(event) {
+//-------------functions----------------//
+function toggleStar() {
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -36,9 +34,13 @@ displaySection.addEventListener('click', function(event) {
     event.target.src = './assets/star.svg';
     event.target.classList.remove('active');
   }
-});
+};
 
-//-------------functions----------------//
+function closeCard() {
+  if (event.target.className === 'close-card') {
+    event.target.closest('article').remove();
+  }
+};
 
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
