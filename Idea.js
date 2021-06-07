@@ -12,11 +12,11 @@ class Idea {
     localStorage.setItem(stringifiedId, stringifiedNewIdea);
   }
 
-  deleteFromStorage() {
-    localStorage.removeItem(this.id);
+  deleteFromStorage(idea) {
+    idea.localStorage.removeItem(idea.id);
   }
 
   updateIdea() {
-    
+
   }
 };
