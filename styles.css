@@ -222,6 +222,10 @@ input {
   height: 175px;
 }
 
+.hidden {
+  display: none!important;
+}
+
 .card-footer {
   display: flex;
   align-items: center;
