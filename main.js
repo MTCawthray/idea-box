@@ -22,7 +22,8 @@ createIdea(event);
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', closeCard);
+displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
+});
 displaySection.addEventListener('click', toggleStar);
 
 //-------------functions----------------//
@@ -43,13 +44,17 @@ function closeCard(event) {
   }
 }
 
+function deleteFromIdeasList(event) {
+  newIdea = findClick(event);
+  newIdea.deleteFromStorage(event);
+  }
+
 function findClick(event) {
   var idea;
   for (var i = 0; i < ideasList.length; i++) {
     if (Number(event.target.id) === ideasList[i].id) {
       var retrievedIdea = new Idea(ideasList[i]);
       idea = retrievedIdea;
-      console.log("inside find click", idea);
     }
   }
   return idea;
