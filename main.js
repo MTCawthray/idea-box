@@ -43,6 +43,18 @@ function closeCard(event) {
   }
 }
 
+function findClick(event) {
+  var idea;
+  for (var i = 0; i < ideasList.length; i++) {
+    if (Number(event.target.id) === ideasList[i].id) {
+      var retrievedIdea = new Idea(ideasList[i]);
+      idea = retrievedIdea;
+      console.log("inside find click", idea);
+    }
+  }
+  return idea;
+}
+
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
