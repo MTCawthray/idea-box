@@ -14,19 +14,24 @@ var newIdea;
 
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
+// showStarIdeaBtn.addEventListener('', );
+// searchIdeasInput.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
   createIdea(event);
 });
-// showStarIdeaBtn.addEventListener('', );
-// searchIdeasInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', deleteFromArray);
-displaySection.addEventListener('click', toggleStar);
+displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
+});
+displaySection.addEventListener('click', function() {
+   toggleStar(event)
+ });
 
 //-------------functions----------------//
-function toggleStar() {
+
+function toggleStar(event) {
+  console.log(event);
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -34,43 +39,31 @@ function toggleStar() {
     event.target.src = './assets/star.svg';
     event.target.classList.remove('active');
   }
+  newIdea = findClick(event);
+  newIdea.updateIdea(event);
 };
 
-function closeCard() {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-    // deleteFromArray();
-    console.log(ideasList);
+function deleteFromIdeasList(event) {
+  newIdea = findClick(event);
+  newIdea.deleteFromStorage(event);
   }
-};
 
-function deleteFromArray() {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-  for (i = 0; i < ideasList.length; i++) {
-   if (Number(event.target.id) === ideasList[i].id) {
-     ideasList.splice(i, 1);
-     // deleteFromStorage();
-   }
- }
-}
-}
-
-
-function disableSaveButton() {
-  if (titleInput.value === "" || bodyInput.value === "") {
-    saveIdeaBtn.disabled = true;
-    saveIdeaBtn.classList.add('save-input:disabled')
-  } else {
-    saveIdeaBtn.disabled = false;
+function findClick(event) {
+  var idea;
+  for (var i = 0; i < ideasList.length; i++) {
+    if (Number(event.target.id) === ideasList[i].id) {
+      var retrievedIdea = new Idea(ideasList[i]);
+      idea = retrievedIdea;
+    }
   }
-};
+  return idea;
+}
 
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
-    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-    newestIdea.saveToStorage();
+    newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+    newIdea.saveToStorage();
     ideasList = [];
     renderIdea();
     clearIdeaInput();
@@ -78,13 +71,13 @@ function createIdea(event) {
 };
 
 function renderIdea() {
-  getIdeasFromLocalStorage();
+  ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
     <article class="idea-card" id="${ideasList[i].id}">
     <div class="card-header">
-    <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
+    <img class="star" src="./assets/star.svg" id="${ideasList[i].id}" alt="Favorite current card" >
     <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
     </div>
     <div class="card-content">
@@ -102,17 +95,23 @@ function renderIdea() {
 
 function getIdeasFromLocalStorage() {
   if (localStorage) {
+    var list = [];
     for(var i =0; i < localStorage.length; i++){
       var retrieveIdea = localStorage.getItem(localStorage.key(i));
       var parsedIdea = JSON.parse(retrieveIdea);
-      var idea = makeIdea(parsedIdea);
+      list.push(parsedIdea)
     }
   }
+  return list;
 };
 
-function makeIdea(parsedIdea) {
-  newIdea = new Idea(parsedIdea);
-  ideasList.push(newIdea);
+function disableSaveButton() {
+  if (titleInput.value === "" || bodyInput.value === "") {
+    saveIdeaBtn.disabled = true;
+    saveIdeaBtn.classList.add('save-input:disabled')
+  } else {
+    saveIdeaBtn.disabled = false;
+  }
 };
 
 function clearIdeaInput() {
