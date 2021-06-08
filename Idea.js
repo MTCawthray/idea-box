@@ -5,20 +5,17 @@ class Idea {
     this.star = ideaDetails.star || false;
     this.id = ideaDetails.id || new Date().valueOf();
   }
-
   saveToStorage() {
     var stringifiedNewIdea = JSON.stringify(this);
     var stringifiedId = JSON.stringify(this.id);
     localStorage.setItem(stringifiedId, stringifiedNewIdea);
   }
-
   deleteFromStorage(event) {
     if (event.target.className === 'close-card') {
       localStorage.removeItem(event.target.id);
       renderIdea();
     }
   }
-
   updateIdea(event) {
     debugger
     var idea;

@@ -11,13 +11,12 @@ var closeCardBtn = document.querySelector('.close-card');
 var star = document.querySelector('.star');
 var ideasList = [];
 var newIdea;
-
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
 // showStarIdeaBtn.addEventListener('', );
 // searchIdeasInput.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
-  createIdea(event);
+createIdea(event);
 });
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
@@ -27,9 +26,7 @@ displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 displaySection.addEventListener('click', function() {
    toggleStar(event)
  });
-
 //-------------functions----------------//
-
 function toggleStar(event) {
   console.log(event);
   if (event.target.className === 'star') {
@@ -42,12 +39,10 @@ function toggleStar(event) {
   newIdea = findClick(event);
   newIdea.updateIdea(event);
 };
-
 function deleteFromIdeasList(event) {
   newIdea = findClick(event);
   newIdea.deleteFromStorage(event);
   }
-
 function findClick(event) {
   var idea;
   for (var i = 0; i < ideasList.length; i++) {
@@ -58,7 +53,6 @@ function findClick(event) {
   }
   return idea;
 }
-
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
@@ -69,7 +63,6 @@ function createIdea(event) {
     clearIdeaInput();
     saveIdeaBtn.disabled = true;
 };
-
 function renderIdea() {
   ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
@@ -92,7 +85,6 @@ function renderIdea() {
     `
   }
 };
-
 function getIdeasFromLocalStorage() {
   if (localStorage) {
     var list = [];
@@ -104,7 +96,6 @@ function getIdeasFromLocalStorage() {
   }
   return list;
 };
-
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
     saveIdeaBtn.disabled = true;
@@ -113,7 +104,6 @@ function disableSaveButton() {
     saveIdeaBtn.disabled = false;
   }
 };
-
 function clearIdeaInput() {
   titleInput.value = "";
   bodyInput.value = "";
