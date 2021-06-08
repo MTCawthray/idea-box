@@ -42,6 +42,7 @@ function toggleStar(event) {
 function deleteFromIdeasList(event) {
   newIdea = findClick(event);
   newIdea.deleteFromStorage(event);
+  renderIdea();
   }
 function findClick(event) {
   var idea;
@@ -64,6 +65,23 @@ function createIdea(event) {
     saveIdeaBtn.disabled = true;
 };
 function renderIdea() {
+  if (!localStorage.length) {
+    displaySection.innerHTML = `
+    <article class="idea-card default">
+      <div class="card-header">
+        <img src="./assets/star-active.svg" alt="Favorite current card">
+      </div>
+      <div class="card-content">
+        <h3>Got an idea?</h3>
+        <p>Let's get started!</p><p>Fill out the form above and click 'Save' to add your first card to this page.</p>
+      </div>
+      <div class="card-footer">
+        <img src="./assets/comment.svg" alt="Add comment to card">
+        <p>Comment</p>
+      </div>
+    </article>
+    `
+  } else {
   ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
@@ -83,6 +101,7 @@ function renderIdea() {
     </div>
     </article>
     `
+  }
   }
 };
 function getIdeasFromLocalStorage() {

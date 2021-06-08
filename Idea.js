@@ -17,7 +17,6 @@ class Idea {
     }
   }
   updateIdea(event) {
-    debugger
     var idea;
     console.log('inside updateIdea', event)
     if (event.target.className === 'star active') {
