@@ -29,6 +29,7 @@ displaySection.addEventListener('click', toggleStar);
 //-------------functions----------------//
 
 function toggleStar(event) {
+  console.log(event);
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -36,13 +37,9 @@ function toggleStar(event) {
     event.target.src = './assets/star.svg';
     event.target.classList.remove('active');
   }
-}
-
-function closeCard(event) {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-  }
-}
+  newIdea = findClick(event);
+  newIdea.updateIdea(event);
+};
 
 function deleteFromIdeasList(event) {
   newIdea = findClick(event);
