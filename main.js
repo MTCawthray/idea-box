@@ -14,17 +14,19 @@ var newIdea;
 
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
+// showStarIdeaBtn.addEventListener('', );
+// searchIdeasInput.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
 });
-// showStarIdeaBtn.addEventListener('', );
-// searchIdeasInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
 displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 });
-displaySection.addEventListener('click', toggleStar);
+displaySection.addEventListener('click', function() {
+   toggleStar(event)
+ });
 
 //-------------functions----------------//
 
