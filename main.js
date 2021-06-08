@@ -43,15 +43,6 @@ function closeCard(event) {
   }
 }
 
-function disableSaveButton() {
-  if (titleInput.value === "" || bodyInput.value === "") {
-    saveIdeaBtn.disabled = true;
-    saveIdeaBtn.classList.add('save-input:disabled')
-  } else {
-    saveIdeaBtn.disabled = false;
-  }
-};
-
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
@@ -86,19 +77,31 @@ function renderIdea() {
   }
 };
 
-function getIdeasFromLocalStorage() {
-  if (localStorage) {
-    for(var i =0; i < localStorage.length; i++){
-      var retrieveIdea = localStorage.getItem(localStorage.key(i));
-      var parsedIdea = JSON.parse(retrieveIdea);
-      var idea = makeIdea(parsedIdea);
-    }
-  }
-};
 
 function makeIdea(parsedIdea) {
   newIdea = new Idea(parsedIdea);
   ideasList.push(newIdea);
+};
+
+function getIdeasFromLocalStorage() {
+  if (localStorage) {
+    var list = [];
+    for(var i =0; i < localStorage.length; i++){
+      var retrieveIdea = localStorage.getItem(localStorage.key(i));
+      var parsedIdea = JSON.parse(retrieveIdea);
+      list.push(parsedIdea)
+    }
+  }
+  return list;
+};
+
+function disableSaveButton() {
+  if (titleInput.value === "" || bodyInput.value === "") {
+    saveIdeaBtn.disabled = true;
+    saveIdeaBtn.classList.add('save-input:disabled')
+  } else {
+    saveIdeaBtn.disabled = false;
+  }
 };
 
 function clearIdeaInput() {
