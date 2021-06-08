@@ -55,14 +55,14 @@ function createIdea(event) {
 };
 
 function renderIdea() {
-  getIdeasFromLocalStorage();
+  ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
-    <article class="idea-card">
+    <article class="idea-card" id="${ideasList[i].id}">
     <div class="card-header">
-    <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
-    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
+    <img class="star" src="./assets/star.svg" id="${ideasList[i].id}" alt="Favorite current card" >
+    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
     </div>
     <div class="card-content">
     <h3>${ideasList[i].title}</h3>
@@ -75,12 +75,6 @@ function renderIdea() {
     </article>
     `
   }
-};
-
-
-function makeIdea(parsedIdea) {
-  newIdea = new Idea(parsedIdea);
-  ideasList.push(newIdea);
 };
 
 function getIdeasFromLocalStorage() {
