@@ -46,8 +46,8 @@ function closeCard(event) {
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
-    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-    newestIdea.saveToStorage();
+    newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+    newIdea.saveToStorage();
     ideasList = [];
     renderIdea();
     clearIdeaInput();
