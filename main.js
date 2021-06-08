@@ -14,21 +14,24 @@ var newIdea;
 
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
+// showStarIdeaBtn.addEventListener('', );
+// searchIdeasInput.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
 });
-// showStarIdeaBtn.addEventListener('', );
-// searchIdeasInput.addEventListener('', );
 bodyInput.addEventListener('keyup', disableSaveButton);
 titleInput.addEventListener('keyup', disableSaveButton);
 window.addEventListener('load', renderIdea);
-displaySection.addEventListener('click', function(event) {
-  if (event.target.className === 'close-card') {
-    event.target.closest('article').remove();
-  }
+displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 });
+displaySection.addEventListener('click', function() {
+   toggleStar(event)
+ });
 
-displaySection.addEventListener('click', function(event) {
+//-------------functions----------------//
+
+function toggleStar(event) {
+  console.log(event);
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -36,25 +39,31 @@ displaySection.addEventListener('click', function(event) {
     event.target.src = './assets/star.svg';
     event.target.classList.remove('active');
   }
-});
-
-//-------------functions----------------//
-
-function disableSaveButton() {
-  if (titleInput.value === "" || bodyInput.value === "") {
-    saveIdeaBtn.disabled = true;
-    saveIdeaBtn.classList.add('save-input:disabled')
-  } else {
-    saveIdeaBtn.disabled = false;
-  }
+  newIdea = findClick(event);
+  newIdea.updateIdea(event);
 };
 
+function deleteFromIdeasList(event) {
+  newIdea = findClick(event);
+  newIdea.deleteFromStorage(event);
+  }
+
+function findClick(event) {
+  var idea;
+  for (var i = 0; i < ideasList.length; i++) {
+    if (Number(event.target.id) === ideasList[i].id) {
+      var retrievedIdea = new Idea(ideasList[i]);
+      idea = retrievedIdea;
+    }
+  }
+  return idea;
+}
+
 function createIdea(event) {
-  debugger
   event.preventDefault();
     saveIdeaBtn.disabled = false
-    var newestIdea = new Idea({title:titleInput.value, body:bodyInput.value});
-    newestIdea.saveToStorage();
+    newIdea = new Idea({title:titleInput.value, body:bodyInput.value});
+    newIdea.saveToStorage();
     ideasList = [];
     renderIdea();
     clearIdeaInput();
@@ -62,14 +71,14 @@ function createIdea(event) {
 };
 
 function renderIdea() {
-  getIdeasFromLocalStorage();
+  ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
     displaySection.innerHTML += `
-    <article class="idea-card">
+    <article class="idea-card" id="${ideasList[i].id}">
     <div class="card-header">
-    <img class="star" src="./assets/star.svg" id="starInactive" alt="Favorite current card">
-    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card">
+    <img class="star" src="./assets/star.svg" id="${ideasList[i].id}" alt="Favorite current card" >
+    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
     </div>
     <div class="card-content">
     <h3>${ideasList[i].title}</h3>
@@ -86,17 +95,23 @@ function renderIdea() {
 
 function getIdeasFromLocalStorage() {
   if (localStorage) {
+    var list = [];
     for(var i =0; i < localStorage.length; i++){
       var retrieveIdea = localStorage.getItem(localStorage.key(i));
       var parsedIdea = JSON.parse(retrieveIdea);
-      var idea = makeIdea(parsedIdea);
+      list.push(parsedIdea)
     }
   }
+  return list;
 };
 
-function makeIdea(parsedIdea) {
-  newIdea = new Idea(parsedIdea);
-  ideasList.push(newIdea);
+function disableSaveButton() {
+  if (titleInput.value === "" || bodyInput.value === "") {
+    saveIdeaBtn.disabled = true;
+    saveIdeaBtn.classList.add('save-input:disabled')
+  } else {
+    saveIdeaBtn.disabled = false;
+  }
 };
 
 function clearIdeaInput() {
