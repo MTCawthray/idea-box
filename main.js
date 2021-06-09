@@ -1,45 +1,41 @@
 //---------Variables-------------//
-var filterStarIdeaBtn = document.querySelector('.filter-ideas-button');
-var searchIconBtn = document.querySelector('.search-icon');
-var saveIdeaBtn = document.querySelector('.save-input');
-var showStarIdeaBtn = document.querySelector('.show-starred-ideas-button');
 var bodyInput = document.querySelector('.body-input');
-var searchIdeasInput = document.querySelector('.search-ideas-box');
-var titleInput = document.querySelector('.title-input');
-var displaySection = document.querySelector('.idea-display-section');
 var closeCardBtn = document.querySelector('.close-card');
+var displaySection = document.querySelector('.idea-display-section');
+var filterStarIdeaBtn = document.querySelector('.filter-ideas-button');
+var saveIdeaBtn = document.querySelector('.save-input');
+var searchIconBtn = document.querySelector('.search-icon');
+var searchIdeasInput = document.querySelector('.search-ideas-box');
+var showStarIdeaBtn = document.querySelector('.show-starred-ideas-button');
 var star = document.querySelector('.star');
+var titleInput = document.querySelector('.title-input');
+
 var ideasList = [];
 var newIdea;
 
 //-----------Event Listeners----------//
-// filterStarIdeaBtn.addEventListener('', );
-showStarIdeaBtn.addEventListener('click', showFavorites);
-// searchIdeasInput.addEventListener('', );
-saveIdeaBtn.addEventListener('click', function() {
-createIdea(event);
-});
+
 bodyInput.addEventListener('keyup', disableSaveButton);
-titleInput.addEventListener('keyup', disableSaveButton);
-window.addEventListener('load', renderIdea);
 displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 });
 displaySection.addEventListener('click', function() {
-   toggleStar(event)
- });
+  toggleStar(event)
+});
+saveIdeaBtn.addEventListener('click', function() {
+  createIdea(event);
+});
+showStarIdeaBtn.addEventListener('click', showFavorites);
+titleInput.addEventListener('keyup', disableSaveButton);
+window.addEventListener('load', renderIdea);
 
 //-------------functions----------------//
 function showFavorites() {
-  debugger
   var favoritesList = [];
   for (var i = 0; i < ideasList.length; i++) {
     if (ideasList[i].star) {
       favoritesList.push(ideasList[i]);
     }
-
   }
-
-  console.log(favoritesList);
   displaySection.innerHTML = '';
   for (var i = 0; i < favoritesList.length; i++) {
     displaySection.innerHTML += `
@@ -59,10 +55,9 @@ function showFavorites() {
     </article>
     `
   }
-}
+};
 
 function toggleStar(event) {
-  console.log(event);
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
     event.target.classList.add('active');
@@ -77,7 +72,7 @@ function toggleStar(event) {
 function deleteFromIdeasList(event) {
   newIdea = findClick(event);
   newIdea.deleteFromStorage(event);
-  }
+};
 
 function findClick(event) {
   var idea;
@@ -88,7 +83,7 @@ function findClick(event) {
     }
   }
   return idea;
-}
+};
 
 function createIdea(event) {
   event.preventDefault();
@@ -102,25 +97,43 @@ function createIdea(event) {
 };
 
 function renderIdea() {
-  ideasList = getIdeasFromLocalStorage();
-  displaySection.innerHTML = ``;
-  for (var i = 0; i < ideasList.length; i++) {
-    displaySection.innerHTML += `
-    <article class="idea-card" id="${ideasList[i].id}">
-    <div class="card-header">
-    <img class="star" src="${starType(ideasList[i])}" id="${ideasList[i].id}" alt="Favorite current card" >
-    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
-    </div>
-    <div class="card-content">
-    <h3>${ideasList[i].title}</h3>
-    <p>${ideasList[i].body}</p>
-    </div>
-    <div class="card-footer">
-    <img src="./assets/comment.svg" alt="Add comment to card">
-    <p>Comment</p>
-    </div>
+  if (!localStorage.length) {
+    displaySection.innerHTML = `
+    <article class="idea-card">
+      <div class="card-header">
+        <img src="./assets/star-active.svg" alt="Favorite current card">
+      </div>
+      <div class="card-content">
+        <h3>Got an idea?</h3>
+        <p>Let's get started!</p><p>Fill out the form above and click 'Save' to add your first card to this page.</p>
+      </div>
+      <div class="card-footer">
+        <img src="./assets/comment.svg" alt="Add comment to card">
+        <p>Comment</p>
+      </div>
     </article>
-    `
+    `;
+  } else {
+    ideasList = getIdeasFromLocalStorage();
+    displaySection.innerHTML = ``;
+    for (var i = 0; i < ideasList.length; i++) {
+      displaySection.innerHTML += `
+      <article class="idea-card" id="${ideasList[i].id}">
+      <div class="card-header">
+      <img class="star" src="${starType(ideasList[i])}" id="${ideasList[i].id}" alt="Favorite current card" >
+      <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
+      </div>
+      <div class="card-content">
+      <h3>${ideasList[i].title}</h3>
+      <p>${ideasList[i].body}</p>
+      </div>
+      <div class="card-footer">
+      <img src="./assets/comment.svg" alt="Add comment to card">
+      <p>Comment</p>
+      </div>
+      </article>
+      `
+    }
   }
 };
 
@@ -130,7 +143,7 @@ function starType(idea) {
   } else {
     return "./assets/star.svg";
   }
-}
+};
 
 function getIdeasFromLocalStorage() {
   if (localStorage) {
@@ -145,7 +158,7 @@ function getIdeasFromLocalStorage() {
 };
 
 function disableSaveButton() {
-  if (titleInput.value === "" || bodyInput.value === "") {
+  if (titleInput.value === '' || bodyInput.value === '') {
     saveIdeaBtn.disabled = true;
     saveIdeaBtn.classList.add('save-input:disabled')
   } else {
@@ -154,6 +167,6 @@ function disableSaveButton() {
 };
 
 function clearIdeaInput() {
-  titleInput.value = "";
-  bodyInput.value = "";
+  titleInput.value = '';
+  bodyInput.value = '';
 };
