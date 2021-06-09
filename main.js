@@ -14,7 +14,7 @@ var newIdea;
 
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
-// showStarIdeaBtn.addEventListener('', );
+showStarIdeaBtn.addEventListener('click', showFavorites);
 // searchIdeasInput.addEventListener('', );
 saveIdeaBtn.addEventListener('click', function() {
 createIdea(event);
@@ -29,6 +29,37 @@ displaySection.addEventListener('click', function() {
  });
 
 //-------------functions----------------//
+function showFavorites() {
+  debugger
+  var favoritesList = [];
+  for (var i = 0; i < ideasList.length; i++) {
+    if (ideasList[i].star) {
+      favoritesList.push(ideasList[i]);
+    }
+
+  }
+
+  console.log(favoritesList);
+  displaySection.innerHTML = '';
+  for (var i = 0; i < favoritesList.length; i++) {
+    displaySection.innerHTML += `
+    <article class="idea-card" id="${favoritesList[i].id}">
+    <div class="card-header">
+    <img class="star" src="${starType(favoritesList[i])}" id="${favoritesList[i].id}" alt="Favorite current card" >
+    <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
+    </div>
+    <div class="card-content">
+    <h3>${favoritesList[i].title}</h3>
+    <p>${favoritesList[i].body}</p>
+    </div>
+    <div class="card-footer">
+    <img src="./assets/comment.svg" alt="Add comment to card">
+    <p>Comment</p>
+    </div>
+    </article>
+    `
+  }
+}
 
 function toggleStar(event) {
   console.log(event);
