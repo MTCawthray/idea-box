@@ -16,12 +16,12 @@ IdeaBox requires no installation; all features can be accessed via the web app, 
 **Sidebar:**
 - The sidebar is located on the left side of the page. Below the logo are two options, "Filter Starred Ideas" and "Show Starred Ideas".
 - *Show Starred Ideas:* This button will display only the idea cards the user has favorited.
-- After clicking *Show Starred Ideas*, the button will now read *Show All Ideas*. Clicking this will revert the card display to show all idea cards the user has created.
 
 **Input Form:**
 - The input form is where the user will add a title and body to create a card.
 - Once the title and body have been added, clicking 'Save' will create a new idea card using the provided information.
 - **Search ideas:** by typing in this box, the idea card display will update to only show cards containing the search terms.
+  - **Note:** this feature is not optional in the current version of this application.
 
 **Idea Display:**
 - This section contains all of the idea cards the user has generated.
