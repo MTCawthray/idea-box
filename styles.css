@@ -1,4 +1,5 @@
 /* <-- Type Selectors --> */
+
 *, *:after, *:before {
   box-sizing: border-box;
   padding: 0px;
@@ -64,6 +65,7 @@ p {
 }
 
 /* <--- Class Stylings ---> */
+
 .body-input {
   margin: 1em 15em;
   height: 8em;
@@ -249,5 +251,4 @@ p {
   height: 4em;
   border: 2px solid #5356a4;
   border-radius: 2px;
-}
-;
+};

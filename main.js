@@ -14,7 +14,6 @@ var ideasList = [];
 var newIdea;
 
 //-----------Event Listeners----------//
-
 bodyInput.addEventListener('keyup', disableSaveButton);
 displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 });
@@ -56,7 +55,6 @@ function showFavorites() {
     `
   }
 };
-
 function toggleStar(event) {
   if (event.target.className === 'star') {
     event.target.src = './assets/star-active.svg';
