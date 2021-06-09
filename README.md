@@ -7,7 +7,7 @@ IdeaBox is a web app where you can jot down and save your ideas! Simply fill out
 
 ## Installation
 
-IdeaBox requires no installation; all features can be accessed via the web app, and local storage is used to keep track of the ideas you have saved.
+IdeaBox requires no installation; all features can be accessed via the web app, and local storage is used to keep track of the ideas the user has saved.
 
 ## Usage
 
@@ -24,12 +24,13 @@ IdeaBox requires no installation; all features can be accessed via the web app, 
 - **Search ideas:** by typing in this box, the idea card display will update to only show cards containing the search terms.
 
 **Idea Display:**
-- This section contains all the idea cards the user has generated.
-- If no cards have been generated, the page will instead display a default card containing instructions for the user to get started. The default card will also be displayed if the user deletes all of their idea cards.
-- Each card contains three buttons: a star, a close button, and a comment button.
+- This section contains all of the idea cards the user has generated.
+  - If no cards have been generated, the page will instead display a default card containing instructions for the user to get started. The default card will also be displayed if the user deletes all of their idea cards.
+- Each card contains three buttons: a star button, a close button, and a comment button.
 - *Star:* this option will add the selected card to the user's favorites.
-- *Close Button (X):* this option will delete the selected card from both the display section and the user's local storage.
-- *Comment (+):* this option allows the user to add a comment to the card. **Note:** this option is not functional in the current version of this application.
+- *Close (X):* this option will delete the selected card from both the display section and the user's local storage.
+- *Comment (+):* this option allows the user to add a comment to the card.
+  - **Note:** this option is not functional in the current version of this application.
 
 **Demonstration:**
 
@@ -37,7 +38,7 @@ IdeaBox requires no installation; all features can be accessed via the web app, 
 
 ## Project Status
 
-This project is partially complete, though some functionality remains to be added. Users can still create and delete idea cards.
+This project is partially complete, though some functionality remains to be added. Users can still perform the app's essential functions such as creating and deleting idea cards, as well as filtering favorited cards.
 
 ## Contributors
 
