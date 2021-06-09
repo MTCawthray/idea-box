@@ -77,7 +77,7 @@ function renderIdea() {
     displaySection.innerHTML += `
     <article class="idea-card" id="${ideasList[i].id}">
     <div class="card-header">
-    <img class="star" src="./assets/star.svg" id="${ideasList[i].id}" alt="Favorite current card" >
+    <img class="star" src="${starType(ideasList[i])}" id="${ideasList[i].id}" alt="Favorite current card" >
     <img class="close-card" src="./assets/menu-close.svg" alt="Close current card" id="${ideasList[i].id}">
     </div>
     <div class="card-content">
@@ -92,6 +92,14 @@ function renderIdea() {
     `
   }
 };
+
+function starType(idea) {
+  if (idea.star) {
+    return "./assets/star-active.svg";
+  } else {
+    return "./assets/star.svg";
+  }
+}
 
 function getIdeasFromLocalStorage() {
   if (localStorage) {
