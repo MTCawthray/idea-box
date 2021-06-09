@@ -11,7 +11,6 @@ var closeCardBtn = document.querySelector('.close-card');
 var star = document.querySelector('.star');
 var ideasList = [];
 var newIdea;
-
 //-----------Event Listeners----------//
 // filterStarIdeaBtn.addEventListener('', );
 // showStarIdeaBtn.addEventListener('', );
@@ -27,9 +26,7 @@ displaySection.addEventListener('click', function() { deleteFromIdeasList(event)
 displaySection.addEventListener('click', function() {
    toggleStar(event)
  });
-
 //-------------functions----------------//
-
 function toggleStar(event) {
   console.log(event);
   if (event.target.className === 'star') {
@@ -42,12 +39,11 @@ function toggleStar(event) {
   newIdea = findClick(event);
   newIdea.updateIdea(event);
 };
-
 function deleteFromIdeasList(event) {
   newIdea = findClick(event);
   newIdea.deleteFromStorage(event);
+  renderIdea();
   }
-
 function findClick(event) {
   var idea;
   for (var i = 0; i < ideasList.length; i++) {
@@ -58,7 +54,6 @@ function findClick(event) {
   }
   return idea;
 }
-
 function createIdea(event) {
   event.preventDefault();
     saveIdeaBtn.disabled = false
@@ -69,8 +64,24 @@ function createIdea(event) {
     clearIdeaInput();
     saveIdeaBtn.disabled = true;
 };
-
 function renderIdea() {
+  if (!localStorage.length) {
+    displaySection.innerHTML = `
+    <article class="idea-card default">
+      <div class="card-header">
+        <img src="./assets/star-active.svg" alt="Favorite current card">
+      </div>
+      <div class="card-content">
+        <h3>Got an idea?</h3>
+        <p>Let's get started!</p><p>Fill out the form above and click 'Save' to add your first card to this page.</p>
+      </div>
+      <div class="card-footer">
+        <img src="./assets/comment.svg" alt="Add comment to card">
+        <p>Comment</p>
+      </div>
+    </article>
+    `
+  } else {
   ideasList = getIdeasFromLocalStorage();
   displaySection.innerHTML = ``;
   for (var i = 0; i < ideasList.length; i++) {
@@ -91,8 +102,8 @@ function renderIdea() {
     </article>
     `
   }
+  }
 };
-
 function getIdeasFromLocalStorage() {
   if (localStorage) {
     var list = [];
@@ -104,7 +115,6 @@ function getIdeasFromLocalStorage() {
   }
   return list;
 };
-
 function disableSaveButton() {
   if (titleInput.value === "" || bodyInput.value === "") {
     saveIdeaBtn.disabled = true;
@@ -113,7 +123,6 @@ function disableSaveButton() {
     saveIdeaBtn.disabled = false;
   }
 };
-
 function clearIdeaInput() {
   titleInput.value = "";
   bodyInput.value = "";
