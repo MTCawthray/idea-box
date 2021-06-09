@@ -5,6 +5,7 @@ IdeaBox is a web app where you can jot down and save your ideas! Simply fill out
 - [App Link](https://mtcawthray.github.io/idea-box/)
 - [Repo Link](https://github.com/MTCawthray/idea-box)
 
+
 ## Installation
 
 IdeaBox requires no installation; all features can be accessed via the web app, and local storage is used to keep track of the ideas the user has saved.
@@ -34,6 +35,7 @@ IdeaBox requires no installation; all features can be accessed via the web app, 
 
 **Demonstration:**
 
+![DEMO](https://user-images.githubusercontent.com/81891209/121286254-cf1a6900-c89c-11eb-8106-9ba1d5162f0f.gif)
 
 
 ## Project Status
